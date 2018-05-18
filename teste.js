@@ -58,12 +58,12 @@ csv()
 			"indexPosition" : eids.findIndex(eid => eid === csvRow[1]),
 			"class1" : csvRow[2],
 			"class2": csvRow[3],
-			"Add1" : AddressData1[4],
-			"Add2" : AddressData1[5],
-			"Add3" : AddressData1[6],
-			"Add4" : AddressData1[7],
-			"Add5" : AddressData1[8],
-			"Add6" : AddressData1[9],
+			"Add1" : csvRow[4],
+			"Add2" : csvRow[5],
+			"Add3" : csvRow[6],
+			"Add4" : csvRow[7],
+			"Add5" : csvRow[8],
+			"Add6" : csvRow[9],
 			invisible : csvRow[10],
 			see_all : csvRow[11]	
 		})
@@ -94,6 +94,55 @@ csv()
 			}
 			class1s[duplicate[v].indexPosition] += " / " + duplicate[v].class1
 			class2s[duplicate[v].indexPosition] += " / " + duplicate[v].class2
+	
+			if(duplicate[v].Add1 && duplicate[v].Add1.indexOf("@") > -1 && !(AddressData1[duplicate[v].indexPosition]) || !(AddressData1[duplicate[v].indexPosition].indexOf("@") > -1) || AddressData1[duplicate[v].indexPosition].indexOf(":") > -1){
+				console.log("here1")
+				AddressData1[duplicate[v].indexPosition] = duplicate[v].Add1
+			}else if(duplicate[v].Add1 && duplicate[v].Add1.indexOf("@") > -1 && AddressData1[duplicate[v].indexPosition] && AddressData1[duplicate[v].indexPosition].indexOf("@") > -1){
+				console.log("aqui1")
+				AddressData1[duplicate[v].indexPosition] += " / " + duplicate[v].Add1
+			}
+			
+			if(duplicate[v].Add2 && duplicate[v].Add2.length > 11 && !(AddressData2[duplicate[v].indexPosition]) || AddressData2[duplicate[v].indexPosition].length <= 11){
+				console.log('here2')
+				AddressData2[duplicate[v].indexPosition] = duplicate[v].Add2
+			}else if(duplicate[v].Add2 && duplicate[v].Add2.length > 11 && AddressData2[duplicate[v].indexPosition] && AddressData2[duplicate[v].indexPosition].length > 11){
+				console.log("aqui2")
+				AddressData2[duplicate[v].indexPosition] += " / " + duplicate[v].Add2
+			}
+
+			if(duplicate[v].Add3 && duplicate[v].Add3.length > 11 && !(AddressData3[duplicate[v].indexPosition]) || (AddressData3[duplicate[v].indexPosition].length <= 11)){
+				console.log('here3')
+				AddressData3[duplicate[v].indexPosition] =  duplicate[v].Add3
+			}else if(duplicate[v].Add3 && duplicate[v].Add3.length > 11 && AddressData3[duplicate[v].indexPosition] && AddressData3[duplicate[v].indexPosition].length > 11){
+				console.log("aqui3")
+				AddressData3[duplicate[v].indexPosition] += " / " + duplicate[v].Add3
+			}
+
+			if(duplicate[v].Add4 && duplicate[v].Add4.indexOf("@") > -1 && !(AddressData4[duplicate[v].indexPosition]) || !(AddressData4[duplicate[v].indexPosition].indexOf("@") > -1) || AddressData4[duplicate[v].indexPosition].indexOf(":") > -1){
+				console.log('here4')
+				AddressData4[duplicate[v].indexPosition] = duplicate[v].Add4
+			}else if(duplicate[v].Add4 && duplicate[v].Add4.indexOf("@") > -1 && AddressData4[duplicate[v].indexPosition] && AddressData4[duplicate[v].indexPosition].indexOf("@") > -1){
+				console.log("aqui4")
+				AddressData4[duplicate[v].indexPosition] += " / " + duplicate[v].Add4
+			}
+
+			if(duplicate[v].Add5 && duplicate[v].Add5.indexOf("@") > -1 && !(AddressData5[duplicate[v].indexPosition]) || !(AddressData5[duplicate[v].indexPosition].indexOf("@") > -1) || AddressData5[duplicate[v].indexPosition].indexOf(":") > -1){
+				console.log('here5')
+				AddressData5[duplicate[v].indexPosition] = duplicate[v].Add5
+			}else if(duplicate[v].Add5 && duplicate[v].Add5.indexOf("@") > -1 && AddressData5[duplicate[v].indexPosition] && AddressData5[duplicate[v].indexPosition].indexOf("@") > -1){
+				console.log("aqui5")
+				AddressData5[duplicate[v].indexPosition] += " / " + duplicate[v].Add5
+			}
+
+			if(duplicate[v].Add6 && duplicate[v].Add6.length > 11 && !AddressData6[duplicate[v].indexPosition] || AddressData6[duplicate[v].indexPosition].length > 11){
+				console.log('here6')
+				AddressData6[duplicate[v].indexPosition] = duplicate[v].Add6
+			}else if(duplicate[v].Add6 && duplicate[v].Add6.length > 11 && AddressData6[duplicate[v].indexPosition] && AddressData6[duplicate[v].indexPosition].length > 11){
+				console.log("aqui6")
+				AddressData6[duplicate[v].indexPosition] += " / " + duplicate[v].Add6
+			}
+
 			alterados.push(duplicate[v].indexPosition)
 		}
 	}
@@ -140,9 +189,23 @@ csv()
 			}
 		}
 		if(AddressData2[x] && AddressData2[x].length > 11)
-			console.log({type: type[1], tags : allTags[1], address: AddressData2[x] })
+			if(AddressData2[x].indexOf("/") > -1){
+				var aux = AddressData2[x].split("/")
+					for (var c = 0; c< aux.length ; c++){
+						console.log({type: type[1], tags : allTags[1], address: aux[c] })
+					}
+			}else{
+				console.log({type: type[1], tags : allTags[1], address: AddressData2[x] })
+			}
 		if(AddressData3[x] && AddressData3[x].length > 11)
-			console.log({type: type[2], tags : allTags[2], address: AddressData3[x]	})
+			if(AddressData3[x].indexOf("/") > -1){
+				var aux = AddressData3[x].split("/")
+					for (var c = 0; c< aux.length ; c++){
+						console.log({type: type[2], tags : allTags[2], address: aux[c] })
+					}
+			}else{
+				console.log({type: type[2], tags : allTags[2], address: AddressData3[x] })
+			}
 		if(AddressData4[x] && AddressData4[x].indexOf("@") > -1){
 			if(AddressData4[x].indexOf("/") > -1){
 				var aux = AddressData4[x].split("/")
@@ -164,7 +227,14 @@ csv()
 			}
 		}
 		if(AddressData6[x] && AddressData6.length > 11 )
-			console.log({type: type[5], tags : allTags[5], address: AddressData6[x] })
+			if(AddressData6[x].indexOf("/") > -1){
+				var aux = AddressData6[x].split("/")
+					for (var c = 0; c< aux.length ; c++){
+						console.log({type: type[5], tags : allTags[5], address: aux[c] })
+					}
+			}else{
+				console.log({type: type[5], tags : allTags[5], address: AddressData6[x] })
+			}
 		if(invisibles[x] == 1){
 			console.log("invisible :" + " True")
 		}else{
