@@ -81,6 +81,7 @@ csv()
 	}	
 })
 .on('done',()=>{
+	var alterados = []
 	if( duplicate.length > 0){
 		flag = true;
 		for (v = 0; v<duplicate.length; v++){
@@ -93,6 +94,7 @@ csv()
 			}
 			class1s[duplicate[v].indexPosition] += " / " + duplicate[v].class1
 			class2s[duplicate[v].indexPosition] += " / " + duplicate[v].class2
+			alterados.push(duplicate[v].indexPosition)
 		}
 	}
 
@@ -115,12 +117,15 @@ csv()
 			}
 		}
 		
-		if(){
-			var t1 = temp[0].join().split(",")
-			var t2 = temp[1].join().split(",")
+		
+		for (var i = 0; i<alterados.length; i++){
+			if(alterados[i] === x){
+				var t1 = temp[0].join().split(",")
+				var t2 = temp[1].join().split(",")
+				temp = t1.concat(t2).sort()
+			}
+		}	
 
-			temp = t1.concat(t2).sort()
-		}
 
 		console.log("classes : " + temp)
 		console.log("addresses : ")
